@@ -2,7 +2,7 @@
 
 Implementación de los siguientes patrones:
 
-Dependency injection
-Factory
-Decorator
+Dependency injection,
+Factory,
+Decorator,
 Abstract Factory
