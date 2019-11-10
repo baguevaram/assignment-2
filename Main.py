@@ -6,8 +6,8 @@ class Motor:
     def getVelocidad(self):
         return self.presion*self.torque
 
-class Vehiculo:
 
+class Vehiculo:
     motor = None
     marca = None
 
@@ -26,7 +26,7 @@ class Vehiculo:
     def getMarca(self):
         return self.marca
 
-    def aceleracion(self,presion):
+    def aceleracion(self, presion):
         if not self.motor is None:
             self.motor.setPresion(presion)
             velocidad = self.motor.getVelocidad()
@@ -42,13 +42,11 @@ class Vehiculo:
         print('ensambe del chasis y la carroceria...')
     
 class Bus (Vehiculo):
-
     def transporta(self):
         return "Transporta personas"
 
 
 class Camion(Vehiculo):
-
     def transporta(self):
         return "Transporta carga o mercancias"
     
@@ -64,23 +62,32 @@ class Mercedes(Vehiculo):
     def marca(self):
         return "Mercedes"
 
+
+class Bus (Vehiculo):
+    def transporta(self):
+        return "Transporta personas"
+
+
+class Camion(Vehiculo):
+    def transporta(self):
+        return "Transporta carga o mercancias"
+
+
 class VehiculoFactory:
     def construirVehiculo(self, tipoCarga, tipoVehiculo):        
         if "Personas" == tipoCarga:
             vehiculo = Bus()
         elif "Carga" == tipoCarga:
-            vehiculo = Camion()        
-        if(tipoVehiculo == 'Ford'):
-            vehiculo.setMarca('Ford')
-            #print('Soy ford')
-        elif(tipoVehiculo == 'Hyundai'):
-            vehiculo.setMarca('Hyundai')
-            #print('Soy Hyundai')
-        elif(tipoVehiculo == 'Mercedes'):
-            vehiculo.setMarca('Mercedes')
-            #print('Soy Hyundai')
+            vehiculo = Camion()
         else:
             vehiculo = Vehiculo()
+            
+        if tipoVehiculo == 'Ford':
+            vehiculo.setMarca('Ford')
+        elif tipoVehiculo == 'Hyundai':
+            vehiculo.setMarca('Hyundai')
+        elif tipoVehiculo == 'Mercedes':
+            vehiculo.setMarca('Mercedes')
         motor = Motor()
         vehiculo.setMotor(motor)
         #vehiculo.instalacionPiezas()
@@ -103,7 +110,3 @@ print(v2.getMarca())
 print(v3.aceleracion(10))
 print(v3.transporta())
 print(v3.getMarca())
-
-
-
-
