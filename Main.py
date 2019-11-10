@@ -9,9 +9,22 @@ class Motor:
 class Vehiculo:
 
     motor = None
+    marca = None
 
     def setMotor(self, motor):
         self.motor = motor
+        
+    def transporta(self):
+        """ este metodo se debe redefinir """
+        pass
+    
+    def setMarca(self, marca):
+        self.marca = marca
+        """ este metodo se debe redefinir """
+        pass
+    
+    def getMarca(self):
+        return self.marca
 
     def aceleracion(self,presion):
         if not self.motor is None:
@@ -27,39 +40,70 @@ class Vehiculo:
         
     def chasisCarroceria(self):
         print('ensambe del chasis y la carroceria...')
-class Ford:
+    
+class Bus (Vehiculo):
 
-    motor = None
+    def transporta(self):
+        return "Transporta personas"
 
-    def setMotor(self, motor):
-        self.motor = motor
 
-    def aceleracion(self,presion):
-        if not self.motor is None:
-            self.motor.setPresion(presion)
-            velocidad = self.motor.getVelocidad()
-        return velocidad
+class Camion(Vehiculo):
+
+    def transporta(self):
+        return "Transporta carga o mercancias"
+    
+class Ford(Vehiculo):
+    def marca(self):
+        return "Ford"
+
+class Hyundai(Vehiculo):
+    def marca(self):
+        return "Hyundai"
+    
+class Mercedes(Vehiculo):
+    def marca(self):
+        return "Mercedes"
 
 class VehiculoFactory:
-    def construirVehiculo(self, tipoVehiculo):
-        vehiculo = Vehiculo()
+    def construirVehiculo(self, tipoCarga, tipoVehiculo):        
+        if "Personas" == tipoCarga:
+            vehiculo = Bus()
+        elif "Carga" == tipoCarga:
+            vehiculo = Camion()        
         if(tipoVehiculo == 'Ford'):
-            print('Soy ford')
+            vehiculo.setMarca('Ford')
+            #print('Soy ford')
         elif(tipoVehiculo == 'Hyundai'):
-            print('Soy Hyundai')
+            vehiculo.setMarca('Hyundai')
+            #print('Soy Hyundai')
+        elif(tipoVehiculo == 'Mercedes'):
+            vehiculo.setMarca('Mercedes')
+            #print('Soy Hyundai')
+        else:
+            vehiculo = Vehiculo()
         motor = Motor()
         vehiculo.setMotor(motor)
-        vehiculo.instalacionPiezas()
-        vehiculo.pintura()
-        vehiculo.chasisCarroceria()
+        #vehiculo.instalacionPiezas()
+        #vehiculo.pintura()
+        #vehiculo.chasisCarroceria()
         return vehiculo;
 
 vF = VehiculoFactory()
 
-v1 = vF.construirVehiculo('Ford')
-v2 = vF.construirVehiculo('Hyundai')
-v3 = vF.construirVehiculo('Ford')
+v1 = vF.construirVehiculo("Personas",'Ford')
+v2 = vF.construirVehiculo("Personas",'Hyundai')
+v3 = vF.construirVehiculo("Carga",'Mercedes')
 
 print(v1.aceleracion(5))
+print(v1.transporta())
+print(v1.getMarca())
 print(v2.aceleracion(7))
+print(v2.transporta())
+print(v2.getMarca())
 print(v3.aceleracion(10))
+print(v3.transporta())
+print(v3.getMarca())
+
+
+
+
